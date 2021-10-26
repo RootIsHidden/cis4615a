@@ -2,11 +2,11 @@
 // VNA00-J. Ensure visibility when accessing shared primitive variables
 // Refference: https://wiki.sei.cmu.edu/confluence/display/java/VNA00-J.+Ensure+visibility+when+accessing+shared+primitive+variables
 // =================================================================================================================================
-// Non-Compliant Solution
+// Compliant Solution
 
 final public class R08_VNA00_J implements Runnable 
 {
-    private boolean done = false;
+    private volatile boolean done = false;
   
     @Override public void run()
     {
@@ -25,7 +25,7 @@ final public class R08_VNA00_J implements Runnable
             }
         }   
     }
-
+     
     public void shutdown()
     {
         done = true;

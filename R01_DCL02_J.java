@@ -5,7 +5,7 @@ import java.util.List;
 // DCL02-J. Do not modify the collection's elements during an enhanced for statement
 // Refference: https://wiki.sei.cmu.edu/confluence/display/java/DCL02-J.+Do+not+modify+the+collection%27s+elements+during+an+enhanced+for+statement
 // ================================================================================================================================================
-// Non-Compliant Solution - modifies a collection's element during an enchanced for statement.
+// Compliant Solution - modifies a collection's element during an enchanced for statement.
 
 public class R01_DCL02_J
 {
@@ -14,16 +14,18 @@ public class R01_DCL02_J
       List<Integer> list = Arrays.asList(new Integer[] {13, 14, 15});
       boolean first = true;
       
+      // This block leaves the actual list unchanged
       System.out.println("Processing list...");
-      for (Integer i: list) 
+      for (final Integer i: list) 
       {
-        if (first)
+        Integer item = i;
+        if (first) 
         {
           first = false;
-          i = new Integer(99);
+          item = new Integer(99);
         }
-        System.out.println(" New item: " + i);
-        // Process i
+        System.out.println(" New item: " + item);
+        // Process item
       }
       
       System.out.println("Modified list?");

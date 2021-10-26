@@ -5,21 +5,20 @@ import java.util.List;
 // OBJ03-J. Prevent heap pollution
 // Refference: https://wiki.sei.cmu.edu/confluence/display/java/OBJ03-J.+Prevent+heap+pollution
 // ============================================================================================
-// Non-Compliant Solution - allows heap pollution.
+// Compliant Solution - does not allow heap pollution.
 
 public class R05_OBJ03_J
 {
-    private static void addToList(List list, Object obj)
+    private static void addToList(List<String> list, String str)
     {
-        // Unchecked warning
-        list.add(obj);
+        // No warning generated
+        list.add(str);
     }
      
     public static void main(String[] args)
     {
         List<String> list = new ArrayList<String> ();
-        addToList(list, 42);
-        // Throws ClassCastException
+        addToList(list, "42");
         System.out.println(list.get(0));
     }
 }
